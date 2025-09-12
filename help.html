@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Essay Finder - Help</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(90deg, #fef9c3, #d4ae14);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      color: #92400e;
+      margin-bottom: 10px;
+    }
+
+    p {
+      text-align: center;
+      max-width: 500px;
+      color: #444;
+      font-size: 16px;
+    }
+
+    ol {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      margin: 20px 0;
+      max-width: 500px;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    textarea {
+      width: 100%;
+      max-width: 500px;
+      padding: 12px;
+      border-radius: 10px;
+      border: 2px solid transparent;
+      resize: none;
+      font-size: 16px;
+      transition: 0.3s;
+      margin-top: 10px;
+    }
+
+    textarea:focus {
+      border-color: #f59e0b;
+      box-shadow: -4px -4px 23px #f3db04,
+      4px 4px 23px #ff0000;
+      outline: none;
+    }
+    button {
+      background: linear-gradient(90deg, #ffd000,#ffffff);
+      color: rgb(0, 0, 0);
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      box-shadow: -4px -4px 23px #ff0000,
+      4px 4px 23px #9dff00;
+    }
+  </style>
+</head>
+<body>
+  <h1>Need Help?</h1>
+  <p>Follow these steps to find or suggest topics for the Essay Finder:</p>
+
+  <ol>
+    <li>Enter a topic in the search bar on the main page.</li>
+    <li>Click "Search" to find relevant essays.</li>
+    <li>If you can’t find your topic, suggest a new one below.</li>
+  </ol>
+
+  <textarea id="suggestionBox" rows="4" placeholder="Type your suggestion here..."></textarea>
+  <button>Submit Suggestion</button>
+
+  <script>
+    document.getElementById('suggestionBox').addEventListener('input', function () {
+      this.style.height = 'auto';
+      this.style.height = this.scrollHeight + 'px';
+    });
+  </script>
+</body>
+</html>
