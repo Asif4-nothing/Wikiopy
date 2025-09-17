@@ -95,3 +95,18 @@ body {
     footer a:hover {
       text-decoration: underline;
     }
+    .logout-container {
+      margin-top: 10px;
+      text-align: center;
+    }
+    .logout-container button {
+      border-color: #ff0000;
+      color: rgb(0, 0, 0);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: box-shadow 0.3s ease;
+      background: linear-gradient(135deg, #07ff3d, #f10404);
+    }

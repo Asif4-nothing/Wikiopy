@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wikiopy Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: #f4f4f4;
+    }
+    .container {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 300px;
+    }
+    input {
+      width: 100%;
+      margin: 0.5rem 0;
+      padding: 0.5rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      margin-top: 1rem;
+      padding: 0.7rem;
+      border: none;
+      background: #007bff;
+      color: white;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    p#error {
+      color: red;
+      font-size: 0.9rem;
+    }
+    .switch {
+      text-align: center;
+      margin-top: 1rem;
+      cursor: pointer;
+      color: #007bff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 id="formTitle">Login</h2>
+    <input type="email" id="email" placeholder="Email" required />
+    <input type="password" id="password" placeholder="Password" required />
+    <button id="actionBtn">Login</button>
+    <p id="error"></p>
+    <p class="switch" id="switchMode">Don't have an account? Sign Up</p>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA_QeTxh0zF0KmQIqJxeNnQbXaN0V9TL8g",
+      authDomain: "wikiopy-4522d.firebaseapp.com",
+      projectId: "wikiopy-4522d",
+      storageBucket: "wikiopy-4522d.firebasestorage.app",
+      messagingSenderId: "325186685705",
+      appId: "1:325186685705:web:b8511c56a2de2f46c461d8",
+      measurementId: "G-STLBV6E9LZ"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    let isLoginMode = true;
+
+    document.getElementById("switchMode").addEventListener("click", () => {
+      isLoginMode = !isLoginMode;
+      document.getElementById("formTitle").textContent = isLoginMode ? "Login" : "Sign Up";
+      document.getElementById("actionBtn").textContent = isLoginMode ? "Login" : "Sign Up";
+      document.getElementById("switchMode").textContent = isLoginMode
+        ? "Don't have an account? Sign Up"
+        : "Already have an account? Login";
+      document.getElementById("error").textContent = "";
+    });
+
+    document.getElementById("actionBtn").addEventListener("click", async () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const errorBox = document.getElementById("error");
+
+      try {
+        if (isLoginMode) {
+          await signInWithEmailAndPassword(auth, email, password);
+          alert("Login successful!");
+          window.location.href = "E:\\code projects\\website projects\\projects\\articals\\index.html"; // Redirect to your main page
+        } else {
+          await createUserWithEmailAndPassword(auth, email, password);
+          alert("Signup successful! You can now log in.");
+          isLoginMode = true;
+          document.getElementById("formTitle").textContent = "Login";
+          document.getElementById("actionBtn").textContent = "Login";
+          document.getElementById("switchMode").textContent = "Don't have an account? Sign Up";
+        }
+      } catch (error) {
+        errorBox.textContent = error.message;
+      }
+    });
+  </script>
+</body>
+</html>

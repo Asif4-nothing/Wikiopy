@@ -16,6 +16,9 @@
     <input type="text" id="searchInput" placeholder="Search for topics..." />
     <button id="searchBtn">Search</button>
   </div>
+  <div class="logout-container">
+    <button id="logoutBtn">Logout</button>
+  </div>
 
   <div id="resultDinosaur" class="result">
     <h2>Dinosaur</h2>
@@ -41,7 +44,40 @@
     <p>Didn't find your topic? <a href="help.html">Suggest a new one</a></p>
   </footer>
 
-  <!-- Linking only the external JS file -->
-  <script src="script.js"></script>
+ <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA_QeTxh0zF0KmQIqJxeNnQbXaN0V9TL8g",
+      authDomain: "wikiopy-4522d.firebaseapp.com",
+      projectId: "wikiopy-4522d",
+      storageBucket: "wikiopy-4522d.firebasestorage.app",
+      messagingSenderId: "325186685705",
+      appId: "1:325186685705:web:b8511c56a2de2f46c461d8",
+      measurementId: "G-STLBV6E9LZ"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Check if user is logged in, otherwise kick them to login.html
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = "login.html"; // redirect if not logged in
+      }
+    });
+
+    // Logout button
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+      try {
+        await signOut(auth);
+        alert("Logged out!");
+        window.location.href = "login.html";
+      } catch (error) {
+        console.error("Logout error:", error);
+      }
+    });
+  </script>
 </body>
 </html>
